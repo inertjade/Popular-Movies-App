@@ -186,12 +186,14 @@ public class MainActivityFragment extends Fragment {
             String jsonStr = null;
 
             try {
-                final String BASE_URL = "http://api.themoviedb.org/3/discover/movie?";
-                final String SORT_BY_PARAM = "sort_by";
+                String BASE_URL = null;
+                if (params[0].equals(RATING_DESC))
+                    BASE_URL = "http://api.themoviedb.org/3/movie/top_rated?";
+                else if (params[0].equals(POPULARITY_DESC))
+                    BASE_URL = "http://api.themoviedb.org/3/movie/popular?";
                 final String API_KEY_PARAM = "api_key";
 
                 Uri builtUri = Uri.parse(BASE_URL).buildUpon()
-                        .appendQueryParameter(SORT_BY_PARAM, params[0])
                         .appendQueryParameter(API_KEY_PARAM, getString(R.string.tmdb_api_key))
                         .build();
 
