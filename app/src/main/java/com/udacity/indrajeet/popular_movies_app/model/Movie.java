@@ -1,14 +1,14 @@
 package com.udacity.indrajeet.popular_movies_app.model;
 
+import android.database.Cursor;
 import android.os.Parcel;
 import android.os.Parcelable;
+
+import com.udacity.indrajeet.popular_movies_app.MainActivityFragment;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-/**
- * Created by Ismael on 10/06/2015.
- */
 public class Movie implements Parcelable {
 
     private int id;
@@ -31,6 +31,16 @@ public class Movie implements Parcelable {
         this.overview = movie.getString("overview");
         this.rating = movie.getInt("vote_average");
         this.date = movie.getString("release_date");
+    }
+
+    public Movie(Cursor cursor) {
+        this.id = cursor.getInt(MainActivityFragment.COL_MOVIE_ID);
+        this.title = cursor.getString(MainActivityFragment.COL_TITLE);
+        this.image = cursor.getString(MainActivityFragment.COL_IMAGE);
+        this.image2 = cursor.getString(MainActivityFragment.COL_IMAGE2);
+        this.overview = cursor.getString(MainActivityFragment.COL_OVERVIEW);
+        this.rating = cursor.getInt(MainActivityFragment.COL_RATING);
+        this.date = cursor.getString(MainActivityFragment.COL_DATE);
     }
 
     public int getId() {
